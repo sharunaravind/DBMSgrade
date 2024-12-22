@@ -3,9 +3,10 @@ import { promisify } from "util";
 import fs from "fs";
 
 const DB_FILE = "grades.db";
+const RESET_DB = false;
 
 // Delete corrupted database if it exists
-if (fs.existsSync(DB_FILE)) {
+if (RESET_DB && fs.existsSync(DB_FILE)) {
   fs.unlinkSync(DB_FILE);
 }
 
