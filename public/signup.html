@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Evaluation System - Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="signup-section">
+            <h2>Teacher Registration</h2>
+            <div id="signup-form">
+                <input type="text" id="signup-username" placeholder="Username">
+                <input type="password" id="signup-password" placeholder="Password">
+                <select id="subject-select">
+                    <option value="">Select Subject</option>
+                    <option value="WAD">WAD</option>
+                    <option value="DBMS">DBMS</option>
+                    <option value="MFCS">MFCS</option>
+                    <option value="SPC">SPC</option>
+                    <option value="DS">DS</option>
+                </select>
+                <button onclick="signup()">Sign Up</button>
+                <p>Already registered? <a href="index.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+</html>
