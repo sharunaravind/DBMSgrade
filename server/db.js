@@ -3,7 +3,7 @@ import { promisify } from "util";
 import fs from "fs";
 
 const DB_FILE = "grades.db";
-const RESET_DB = false;
+const RESET_DB = true;
 
 // Delete corrupted database if it exists
 if (RESET_DB && fs.existsSync(DB_FILE)) {
