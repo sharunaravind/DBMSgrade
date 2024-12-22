@@ -1,8 +1,8 @@
-import sqlite3 from 'sqlite3';
-import { promisify } from 'util';
-import fs from 'fs';
+import sqlite3 from "sqlite3";
+import { promisify } from "util";
+import fs from "fs";
 
-const DB_FILE = 'grades.db';
+const DB_FILE = "grades.db";
 
 // Delete corrupted database if it exists
 if (fs.existsSync(DB_FILE)) {
@@ -12,10 +12,10 @@ if (fs.existsSync(DB_FILE)) {
 // Create a new database instance
 const db = new sqlite3.Database(DB_FILE, (err) => {
   if (err) {
-    console.error('Database creation error:', err);
+    console.error("Database creation error:", err);
     process.exit(1);
   }
-  console.log('Connected to SQLite database');
+  console.log("Connected to SQLite database");
 });
 
 // Promisify database methods
@@ -53,9 +53,9 @@ const initDb = async () => {
       )
     `);
 
-    console.log('Database tables initialized successfully');
+    console.log("Database tables initialized successfully");
   } catch (error) {
-    console.error('Database initialization error:', error);
+    console.error("Database initialization error:", error);
     process.exit(1);
   }
 };
@@ -64,12 +64,12 @@ const initDb = async () => {
 initDb();
 
 // Add error handling for database operations
-process.on('SIGINT', () => {
+process.on("SIGINT", () => {
   db.close((err) => {
     if (err) {
-      console.error('Error closing database:', err);
+      console.error("Error closing database:", err);
     } else {
-      console.log('Database connection closed');
+      console.log("Database connection closed");
     }
     process.exit(err ? 1 : 0);
   });
@@ -78,5 +78,5 @@ process.on('SIGINT', () => {
 export default {
   run,
   get,
-  all
+  all,
 };

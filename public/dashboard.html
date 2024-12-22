@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grade Evaluation Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Load modules in correct order -->
     <script src="js/constants.js"></script>
@@ -12,43 +12,44 @@
     <script src="js/chartUtils.js"></script>
     <script src="js/gradeDisplay.js"></script>
     <script src="js/dashboard.js"></script>
-</head>
-<body>
+    <script src="js/auth.js"></script>
+  </head>
+  <body>
     <div class="container">
-        <div id="main-section">
-            <header>
-                <h2>Grade Entry System</h2>
-                <h3 id="current-subject"></h3>
-                <button onclick="logout()" class="logout-btn">Logout</button>
-            </header>
-            
-            <div class="grade-entry">
-                <div class="input-methods">
-                    <div class="manual-entry">
-                        <h4>Manual Entry</h4>
-                        <input type="number" id="num-students" placeholder="Number of Students" min="1">
-                        <button onclick="generateStudentFields()">Generate Fields</button>
-                    </div>
-                    
-                    <div class="file-upload">
-                        <h4>Excel Upload</h4>
-                        <input type="file" id="excel-upload" accept=".xlsx,.xls" onchange="handleFileUpload(event)">
-                        <p class="file-format">Format: Roll No, T1, T2, AP, Tutorial, Finals</p>
-                    </div>
-                </div>
+      <div id="main-section">
+        <header>
+          <h2>Grade Entry System</h2>
+          <h3 id="current-subject"></h3>
+          <button onclick="logout()" class="logout-btn">Logout</button>
+        </header>
+
+        <div class="grade-entry">
+          <div class="input-methods">
+            <div class="manual-entry">
+              <h4>Manual Entry</h4>
+              <input type="number" id="num-students" placeholder="Number of Students" min="1" />
+              <button onclick="generateStudentFields()">Generate Fields</button>
             </div>
 
-            <div id="student-fields"></div>
-            <button onclick="submitGrades()" class="submit-btn">Submit Grades</button>
-
-            <div class="view-section">
-                <h3>Grade Distribution</h3>
-                <div id="grades-table"></div>
-                <div class="chart-container">
-                    <canvas id="gradeDistribution"></canvas>
-                </div>
+            <div class="file-upload">
+              <h4>Excel Upload</h4>
+              <input type="file" id="excel-upload" accept=".xlsx,.xls" onchange="handleFileUpload(event)" />
+              <p class="file-format">Format: Roll No, T1, T2, AP, Tutorial, Finals</p>
             </div>
+          </div>
         </div>
+
+        <div id="student-fields"></div>
+        <button onclick="submitGrades()" class="submit-btn">Submit Grades</button>
+
+        <div class="view-section">
+          <h3>Grade Distribution</h3>
+          <div id="grades-table"></div>
+          <div class="chart-container">
+            <canvas id="gradeDistribution"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

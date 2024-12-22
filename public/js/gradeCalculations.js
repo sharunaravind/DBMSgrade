@@ -2,9 +2,9 @@
 function calculateTotalScore(grade) {
   return (
     grade.t_total + // T_total (max 20)
-    grade.ap +      // AP (max 15)
+    grade.ap + // AP (max 15)
     grade.tutorial + // Tutorial (max 15)
-    grade.finals    // Finals (max 50)
+    grade.finals // Finals (max 50)
   );
 }
 
@@ -12,7 +12,7 @@ function calculateTotalScore(grade) {
 function calculatePercentile(grades, currentGrade) {
   const allTotalScores = grades.map(calculateTotalScore);
   const currentTotalScore = calculateTotalScore(currentGrade);
-  const higherScores = allTotalScores.filter(score => score <= currentTotalScore).length;
+  const higherScores = allTotalScores.filter((score) => score <= currentTotalScore).length;
   return ((higherScores / allTotalScores.length) * 100).toFixed(1);
 }
 
@@ -26,6 +26,19 @@ function calculateStatistics(data) {
 
 // Calculate Gaussian function value
 function gaussianFunction(x, mean, standardDeviation) {
-  return (1 / (standardDeviation * Math.sqrt(2 * Math.PI))) * 
-         Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(standardDeviation, 2)));
+  return (
+    (1 / (standardDeviation * Math.sqrt(2 * Math.PI))) * Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(standardDeviation, 2)))
+  );
+}
+
+//caluclate cpga from final score.
+function calculateCgpa(totalScore) {
+  console.log(totalScore);
+  if (totalScore >= 91) return 10;
+  if (totalScore >= 81) return 9;
+  if (totalScore >= 71) return 8;
+  if (totalScore >= 61) return 7;
+  if (totalScore >= 56) return 6;
+  if (totalScore >= 50) return 5;
+  return null; // Return null for scores below 50
 }
