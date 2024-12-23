@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CGPA Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/cgpaDashboard.js" defer></script>
+    <script src="js/auth.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h2>CGPA Dashboard</h2>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+      </header>
+
+      <div id="grades-section">
+        <h3>Student CGPA Details</h3>
+        <table id="cgpa-table">
+          <thead>
+            <tr>
+              <th>Roll No</th>
+              <th>WAD</th>
+              <th>DS</th>
+              <th>SPC</th>
+              <th>MFCS</th>
+              <th>DBMS</th>
+              <th>Overall CGPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data will be populated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

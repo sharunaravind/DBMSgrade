@@ -62,8 +62,83 @@ router.post("/upload", authenticateToken, upload.single("file"), async (req, res
   }
 });
 
+router.get("/cgpa", async (req, res) => {
+  try {
+    console.log("hello");
+    // Fetch all grades from the database
+    const grades = await db.all("SELECT roll_no, subject, t1, t2, t_total, ap, tutorial, finals FROM grades");
+    console.log(grades);
+    // Define subject credit weights
+    const subjectCredits = {
+      WAD: 3,
+      DS: 3,
+      SPC: 3,
+      MFCS: 4,
+      DBMS: 4,
+    };
+
+    // Transform grades into a structure suitable for calculating CGPAs
+    const studentData = {};
+
+    grades.forEach((grade) => {
+      const { roll_no, subject, t1, t2, t_total, ap, tutorial, finals } = grade;
+
+      // Skip subjects not in the subjectCredits list
+      if (!subjectCredits[subject]) return;
+
+      // Ensure each student has an entry
+      if (!studentData[roll_no]) {
+        studentData[roll_no] = { subjects: {}, totalWeight: 0, weightedCgpaSum: 0 };
+      }
+
+      // Calculate total score for the subject
+      const totalScore = (t_total + ap + tutorial) / (40 / 50) + finals / (60 / 50);
+
+      // Calculate CGPA for the subject
+      const cgpa =
+        totalScore >= 91
+          ? 10
+          : totalScore >= 81
+          ? 9
+          : totalScore >= 71
+          ? 8
+          : totalScore >= 61
+          ? 7
+          : totalScore >= 56
+          ? 6
+          : totalScore >= 50
+          ? 5
+          : null; // Below 50 doesn't contribute to CGPA
+
+      // Store subject CGPA
+      studentData[roll_no].subjects[subject] = cgpa;
+
+      // Accumulate weighted CGPA
+      if (cgpa !== null) {
+        const weight = subjectCredits[subject];
+        studentData[roll_no].totalWeight += weight;
+        studentData[roll_no].weightedCgpaSum += cgpa * weight;
+      }
+    });
+
+    // Final transformation to compute weighted average CGPA
+    const results = Object.entries(studentData).map(([roll_no, data]) => ({
+      roll_no,
+      ...data.subjects, // Spread subject-wise CGPAs
+      overall_cgpa: data.totalWeight > 0 ? (data.weightedCgpaSum / data.totalWeight).toFixed(2) : "N/A",
+    }));
+
+    // Return the transformed data
+    console.log(results);
+    res.json(results);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.get("/:subject", authenticateToken, async (req, res) => {
   try {
+    console.log("hello ths is subject");
     const grades = await db.all("SELECT * FROM grades WHERE subject = ? AND teacher_id = ?", [req.params.subject, req.user.id]);
     res.json(grades);
   } catch (error) {
