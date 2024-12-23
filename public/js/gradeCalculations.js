@@ -1,11 +1,6 @@
 // Calculate total score from all components
 function calculateTotalScore(grade) {
-  return (
-    grade.t_total + // T_total (max 20)
-    grade.ap + // AP (max 15)
-    grade.tutorial + // Tutorial (max 15)
-    grade.finals // Finals (max 50)
-  );
+  return (grade.t_total + grade.ap + grade.tutorial) / (40 / 50) + grade.finals / (60 / 50);
 }
 
 // Calculate percentile based on total scores

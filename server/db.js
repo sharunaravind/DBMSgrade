@@ -41,7 +41,7 @@ const initDb = async () => {
       CREATE TABLE IF NOT EXISTS grades (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         subject TEXT NOT NULL,
-        roll_no TEXT NOT NULL,
+        roll_no TEXT NOT NULL UNIQUE,
         t1 REAL,
         t2 REAL,
         t_total REAL,
