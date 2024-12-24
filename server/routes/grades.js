@@ -83,7 +83,7 @@ router.get("/cgpa", async (req, res) => {
     grades.forEach((grade) => {
       const { roll_no, subject, t1, t2, t_total, ap, tutorial, finals } = grade;
 
-      // Skip subjects not in the subjectCredits list
+    
       if (!subjectCredits[subject]) return;
 
       // Ensure each student has an entry
@@ -91,10 +91,10 @@ router.get("/cgpa", async (req, res) => {
         studentData[roll_no] = { subjects: {}, totalWeight: 0, weightedCgpaSum: 0 };
       }
 
-      // Calculate total score for the subject
+      
       const totalScore = (t_total + ap + tutorial) / (40 / 50) + finals / (60 / 50);
 
-      // Calculate CGPA for the subject
+      
       const cgpa =
         totalScore >= 91
           ? 10
